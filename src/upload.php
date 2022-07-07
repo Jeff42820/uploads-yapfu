@@ -1403,7 +1403,14 @@ function get_dirhash() {
 function set_pcookie($name, $v) {
     $fpath = get_wdir().'/.cookies';
 
-    try { $str = file_get_contents($fpath); }   catch (Exception $e) {  $str = false;  }
+    try { 
+        ob_start();
+        $str = file_get_contents($fpath); 
+        $output = ob_get_clean();
+    }   
+    catch (Exception $e) {  
+        $str = false;  
+    }
     if  ( $str === false ) $str = json_encode( [] );
 
     $array = json_decode( $str, true );         if ($array === null) $array = [] ;
@@ -1411,7 +1418,14 @@ function set_pcookie($name, $v) {
     $array [ $name ] = $v;
     $str = json_encode( $array );
 
-    try { $r = file_put_contents( $fpath, $str, LOCK_EX ); }  catch (Exception $e) {    $r = false;  }
+    try { 
+        ob_start();
+        $r = file_put_contents( $fpath, $str, LOCK_EX ); 
+        $output = ob_get_clean();
+    }  
+    catch (Exception $e) {
+        $r = false;  
+    }
     if ($r === false)  return false;  
     return true;
 }
@@ -1420,7 +1434,14 @@ function set_pcookie($name, $v) {
 function get_pcookie($name) {
     $fpath = get_wdir().'/.cookies';
 
-    try { $str = file_get_contents($fpath);  }  catch (Exception $e) {   $str = false;  }
+    try { 
+        ob_start();
+        $str = file_get_contents($fpath);  
+        $output = ob_get_clean();
+    }  
+    catch (Exception $e) {   
+        $str = false;  
+    }
     if  ( $str === false) $str = json_encode( [] );
 
     $array = json_decode( $str, true );
@@ -1429,7 +1450,6 @@ function get_pcookie($name) {
     if ( isset($array[$name]) )   return $array[ $name ];
     return null;
 }
-
 
 
 function read_post_data() {
