@@ -1,6 +1,6 @@
 # uploads-yapfu
 
-<h1>File Uploader - only one php file</h1>
+<h1>File Uploader - all-in-one php file</h1>
 
 <h2>Description</h2>
 
