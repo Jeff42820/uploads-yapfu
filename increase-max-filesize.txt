@@ -1,0 +1,27 @@
+
+Depending of your php configuration, the biggest size that can be uploaded may be small.
+
+To be able to upload biggest files, you may change some of these parameters.
+
+
+#   Edit php.ini located 
+
+#   Initial values for my config
+      memory_limit=128M
+      upload_max_filesize=2M
+      post_max_size=8M
+      max_execution_time=30
+      max_input_time=60
+
+#   Change to (suggestion)
+      memory_limit=256M
+      upload_max_filesize=256M
+      post_max_size=256M
+      max_execution_time=240
+      max_input_time=240
+
+#   reload the new parameters
+sudo systemctl restart php7.4-fpm.service (depends of your installation)
+
+#   And then you can upload files up to 200 Mb
+
