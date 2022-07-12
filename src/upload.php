@@ -335,7 +335,6 @@ class Application {
         this.copyright = null;
         this.session_hash = null;
         this.clientip = null;
-        // from php :  $list = [ 'allowed_ext', 'msg_from_php', 'upl_maxsize', 'copyright', 'session_hash', 'clientip' ];
     }
 
     // event
