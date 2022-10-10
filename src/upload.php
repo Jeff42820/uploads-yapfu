@@ -1344,7 +1344,15 @@ function init_session() {
     global $session_hash;
     global $locale;
     global $user;
-    ini_set('session.use_strict_mode', 1);
+    
+    $cookieParams = session_get_cookie_params();
+    $cookieParams['samesite'] = 'Strict'; // None, Lax or Strict.
+    $cookieParams['httponly'] = true;
+    $cookieParams['secure'] = false; // $_SERVER['HTTPS'] ? true : false;
+    $cookieParams['domain'] = $_SERVER['HTTP_HOST'];
+    $cookieParams['path'] =  '/';
+    session_set_cookie_params($cookieParams);
+    // ini_set('session.use_strict_mode', 1);
     session_start();    
     $session_hash = hash('sha256', session_id().$user);
 
